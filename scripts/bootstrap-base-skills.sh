@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-INACTU_CLI_BIN="${INACTU_CLI_BIN:-inactu-cli}"
+INACTU_CLI_BIN="${INACTU_CLI_BIN:-}"
 INACTU_ROOT="${INACTU_ROOT:-$ROOT_DIR/../inactu}"
 VERSION="${VERSION:-0.1.0}"
 SIGNER_ID="${SIGNER_ID:-alice.dev}"
@@ -11,8 +11,23 @@ TEMPLATE_WASM="${TEMPLATE_WASM:-$INACTU_ROOT/test-vectors/good/minimal-zero-cap/
 TEMPLATE_KEYS="${TEMPLATE_KEYS:-$INACTU_ROOT/test-vectors/good/minimal-zero-cap/public-keys.json}"
 WATC_MANIFEST="${WATC_MANIFEST:-$ROOT_DIR/tools/watc/Cargo.toml}"
 
-if ! command -v "$INACTU_CLI_BIN" >/dev/null 2>&1; then
-  echo "error: inactu-cli not found (set INACTU_CLI_BIN)" >&2
+if [[ -z "$INACTU_CLI_BIN" ]]; then
+  if command -v inactu-cli >/dev/null 2>&1; then
+    INACTU_CLI_BIN="inactu-cli"
+  elif [[ -x "$INACTU_ROOT/target/debug/inactu-cli" ]]; then
+    INACTU_CLI_BIN="$INACTU_ROOT/target/debug/inactu-cli"
+  elif [[ -d "$INACTU_ROOT" ]]; then
+    echo "building inactu-cli from INACTU_ROOT..." >&2
+    cargo build -p inactu-cli --manifest-path "$INACTU_ROOT/Cargo.toml" >/dev/null
+    INACTU_CLI_BIN="$INACTU_ROOT/target/debug/inactu-cli"
+  else
+    echo "error: inactu-cli not found (set INACTU_CLI_BIN or INACTU_ROOT)" >&2
+    exit 1
+  fi
+fi
+
+if ! command -v "$INACTU_CLI_BIN" >/dev/null 2>&1 && [[ ! -x "$INACTU_CLI_BIN" ]]; then
+  echo "error: configured INACTU_CLI_BIN is not executable: $INACTU_CLI_BIN" >&2
   exit 1
 fi
 if ! command -v node >/dev/null 2>&1; then
