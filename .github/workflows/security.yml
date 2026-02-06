@@ -1,0 +1,56 @@
+name: Security
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  watc-audit:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/watc
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+
+      - name: Install cargo-audit
+        run: cargo install cargo-audit --locked
+
+      - name: Cargo audit
+        run: cargo audit --deny warnings
+
+  pin-verification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout skills repo
+        uses: actions/checkout@v4
+
+      - name: Checkout substrate
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/inactu
+          path: inactu
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Build inactu-cli
+        working-directory: inactu
+        run: cargo build -p inactu-cli
+
+      - name: Verify lockfile pins
+        env:
+          INACTU_CLI_BIN: ${{ github.workspace }}/inactu/target/debug/inactu-cli
+        run: make verify-pins
