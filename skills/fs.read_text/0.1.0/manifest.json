@@ -1,0 +1,16 @@
+{
+  "name": "fs.read_text",
+  "version": "0.1.0",
+  "entrypoint": "run",
+  "artifact": "sha256:7bc329fd2973172b7f285baa63cc9847983a0fe19a3304415269b9883b29704e",
+  "capabilities": [
+    {
+      "kind": "fs.read",
+      "value": "/tmp/inactu-fs"
+    }
+  ],
+  "signers": [
+    "alice.dev",
+    "codex.release"
+  ]
+}

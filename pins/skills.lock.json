@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-02-06T23:20:50.827Z",
+  "generated_at": "2026-02-07T00:16:53.262Z",
   "substrate_pin": {
     "repo": "inactu",
-    "commit": "cba7a6df6fe22657e7916adcd298b71406c965c3"
+    "commit": "54331bc0a9f5d76e07c629570d4e9fbd22daeb60"
   },
   "skills": [
     {
@@ -33,6 +33,19 @@
       ]
     },
     {
+      "id": "extract.text",
+      "version": "0.1.0",
+      "bundle_dir": "skills/extract.text/0.1.0",
+      "artifact": "sha256:03b85fa8fb92d2f3704a2560afb0cfab1698c8b713f10a41cd414abc30548be7",
+      "manifest_hash": "sha256:99f3d26db85b65a4069e258625d6ef7a79879bd336ca6288d54b963b839fb7ba",
+      "keys_file": "public-keys.json",
+      "keys_digest": "sha256:7eedf77df5d40b3f6cf489cd04054af6c8ea5c0c61a9a1926d1da910920c8572",
+      "signers": [
+        "alice.dev",
+        "codex.release"
+      ]
+    },
+    {
       "id": "fs.read",
       "version": "0.1.0",
       "bundle_dir": "skills/fs.read/0.1.0",
@@ -46,6 +59,32 @@
       ]
     },
     {
+      "id": "fs.read_text",
+      "version": "0.1.0",
+      "bundle_dir": "skills/fs.read_text/0.1.0",
+      "artifact": "sha256:7bc329fd2973172b7f285baa63cc9847983a0fe19a3304415269b9883b29704e",
+      "manifest_hash": "sha256:4b5570c871c5dd2ee7a2e98123ad9d7c3c39c0ae7c5474d0f74a78f40a2472fc",
+      "keys_file": "public-keys.json",
+      "keys_digest": "sha256:7eedf77df5d40b3f6cf489cd04054af6c8ea5c0c61a9a1926d1da910920c8572",
+      "signers": [
+        "alice.dev",
+        "codex.release"
+      ]
+    },
+    {
+      "id": "fs.read_tree",
+      "version": "0.1.0",
+      "bundle_dir": "skills/fs.read_tree/0.1.0",
+      "artifact": "sha256:2fcb9326dc0ed318489afb4d0e34f7adb95b9ce033809bef0ecb8b057d3da581",
+      "manifest_hash": "sha256:e84531fb9c9ee01b7ef7c4c785fb6136d5010d2b30a6ab886a5c788793f0663f",
+      "keys_file": "public-keys.json",
+      "keys_digest": "sha256:7eedf77df5d40b3f6cf489cd04054af6c8ea5c0c61a9a1926d1da910920c8572",
+      "signers": [
+        "alice.dev",
+        "codex.release"
+      ]
+    },
+    {
       "id": "fs.write",
       "version": "0.1.0",
       "bundle_dir": "skills/fs.write/0.1.0",
@@ -56,6 +95,45 @@
       "signers": [
         "alice.dev",
         "opertus.release"
+      ]
+    },
+    {
+      "id": "fs.write_patch",
+      "version": "0.1.0",
+      "bundle_dir": "skills/fs.write_patch/0.1.0",
+      "artifact": "sha256:03b85fa8fb92d2f3704a2560afb0cfab1698c8b713f10a41cd414abc30548be7",
+      "manifest_hash": "sha256:a9c0def66bc2e47a32649d853ec1c6e23ea581b5b0c91e44207e8f98a79fff36",
+      "keys_file": "public-keys.json",
+      "keys_digest": "sha256:7eedf77df5d40b3f6cf489cd04054af6c8ea5c0c61a9a1926d1da910920c8572",
+      "signers": [
+        "alice.dev",
+        "codex.release"
+      ]
+    },
+    {
+      "id": "git.diff",
+      "version": "0.1.0",
+      "bundle_dir": "skills/git.diff/0.1.0",
+      "artifact": "sha256:03b85fa8fb92d2f3704a2560afb0cfab1698c8b713f10a41cd414abc30548be7",
+      "manifest_hash": "sha256:0585ba2d830a8d3ec6c912722dc42085d753dbaf8b88b0a8803d2de8ce847b95",
+      "keys_file": "public-keys.json",
+      "keys_digest": "sha256:7eedf77df5d40b3f6cf489cd04054af6c8ea5c0c61a9a1926d1da910920c8572",
+      "signers": [
+        "alice.dev",
+        "codex.release"
+      ]
+    },
+    {
+      "id": "git.status",
+      "version": "0.1.0",
+      "bundle_dir": "skills/git.status/0.1.0",
+      "artifact": "sha256:03b85fa8fb92d2f3704a2560afb0cfab1698c8b713f10a41cd414abc30548be7",
+      "manifest_hash": "sha256:1f320561aa840a3ff726b1083852b396414f216b7baa662bc09474368b24d2b7",
+      "keys_file": "public-keys.json",
+      "keys_digest": "sha256:7eedf77df5d40b3f6cf489cd04054af6c8ea5c0c61a9a1926d1da910920c8572",
+      "signers": [
+        "alice.dev",
+        "codex.release"
       ]
     },
     {
@@ -85,6 +163,19 @@
       ]
     },
     {
+      "id": "http.fetch_text",
+      "version": "0.1.0",
+      "bundle_dir": "skills/http.fetch_text/0.1.0",
+      "artifact": "sha256:76ad51e33bdf411c3ca39db46b551df3a1a46f87f314f40504b65b3eb68e6735",
+      "manifest_hash": "sha256:3db91c52ddeded71bfe2f364aa87f9a090b176ac73ab3b0dad76f19775e7a97e",
+      "keys_file": "public-keys.json",
+      "keys_digest": "sha256:7eedf77df5d40b3f6cf489cd04054af6c8ea5c0c61a9a1926d1da910920c8572",
+      "signers": [
+        "alice.dev",
+        "codex.release"
+      ]
+    },
+    {
       "id": "json.transform",
       "version": "0.1.0",
       "bundle_dir": "skills/json.transform/0.1.0",
@@ -95,6 +186,19 @@
       "signers": [
         "alice.dev",
         "opertus.release"
+      ]
+    },
+    {
+      "id": "json.validate",
+      "version": "0.1.0",
+      "bundle_dir": "skills/json.validate/0.1.0",
+      "artifact": "sha256:03b85fa8fb92d2f3704a2560afb0cfab1698c8b713f10a41cd414abc30548be7",
+      "manifest_hash": "sha256:6e1aa8360a289f11a5bc597c54fe35a38c21d3322a524786139d569d3c9aed91",
+      "keys_file": "public-keys.json",
+      "keys_digest": "sha256:7eedf77df5d40b3f6cf489cd04054af6c8ea5c0c61a9a1926d1da910920c8572",
+      "signers": [
+        "alice.dev",
+        "codex.release"
       ]
     },
     {
@@ -199,6 +303,32 @@
       "signers": [
         "alice.dev",
         "opertus.release"
+      ]
+    },
+    {
+      "id": "search.ripgrep",
+      "version": "0.1.0",
+      "bundle_dir": "skills/search.ripgrep/0.1.0",
+      "artifact": "sha256:03b85fa8fb92d2f3704a2560afb0cfab1698c8b713f10a41cd414abc30548be7",
+      "manifest_hash": "sha256:b6b906f8d310dce7b6feb2e7259dc4f7bbf6681a819a14dc98dc861a8d7be54a",
+      "keys_file": "public-keys.json",
+      "keys_digest": "sha256:7eedf77df5d40b3f6cf489cd04054af6c8ea5c0c61a9a1926d1da910920c8572",
+      "signers": [
+        "alice.dev",
+        "codex.release"
+      ]
+    },
+    {
+      "id": "shell.exec_safe",
+      "version": "0.1.0",
+      "bundle_dir": "skills/shell.exec_safe/0.1.0",
+      "artifact": "sha256:03b85fa8fb92d2f3704a2560afb0cfab1698c8b713f10a41cd414abc30548be7",
+      "manifest_hash": "sha256:7a80b4ca177cf057f12a701165c8baa8dc64d2968bb17142d366c4f8a6c7c0ea",
+      "keys_file": "public-keys.json",
+      "keys_digest": "sha256:7eedf77df5d40b3f6cf489cd04054af6c8ea5c0c61a9a1926d1da910920c8572",
+      "signers": [
+        "alice.dev",
+        "codex.release"
       ]
     },
     {
