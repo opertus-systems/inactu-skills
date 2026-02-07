@@ -1,0 +1,16 @@
+{
+  "name": "http.fetch_text",
+  "version": "0.1.0",
+  "entrypoint": "run",
+  "artifact": "sha256:76ad51e33bdf411c3ca39db46b551df3a1a46f87f314f40504b65b3eb68e6735",
+  "capabilities": [
+    {
+      "kind": "net.http",
+      "value": "https://example.com/"
+    }
+  ],
+  "signers": [
+    "alice.dev",
+    "codex.release"
+  ]
+}

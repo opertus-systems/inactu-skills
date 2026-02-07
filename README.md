@@ -48,6 +48,36 @@ Pinned baseline set:
 Intentionally excluded:
 - `exec.detached` (out of scope for safe skill execution boundaries)
 
+## Default Bundle v0 (Scaffold)
+
+Proposed default bundle (agent-facing IDs):
+
+- `fs.read_text`
+- `fs.read_tree`
+- `fs.write_patch`
+- `shell.exec_safe`
+- `search.ripgrep`
+- `git.status`
+- `git.diff`
+- `http.fetch_text`
+- `json.validate`
+- `extract.text`
+
+Spec: `DEFAULT_BUNDLE_V0_SPEC.md`.
+
+Bootstrap command:
+
+```bash
+./scripts/bootstrap-default-bundle-v0.sh
+```
+
+Current ABI status:
+
+- Implemented hostcall-backed behavior: `fs.read_text`, `fs.read_tree`, `http.fetch_text`
+- Placeholder behavior pending runtime hostcall support:
+  `fs.write_patch`, `shell.exec_safe`, `search.ripgrep`, `git.status`,
+  `git.diff`, `json.validate`, `extract.text`
+
 Bootstrap command:
 
 ```bash
