@@ -40,7 +40,7 @@ jobs:
         uses: dtolnay/rust-toolchain@4be9e76fd7c4901c61fb841f559994984270fce7
 
       - name: Setup Node
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238
         with:
           node-version: "20"
 
