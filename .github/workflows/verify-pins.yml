@@ -30,10 +30,17 @@ jobs:
             echo "repo=${{ github.repository_owner }}/provenact-cli" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Resolve substrate commit from lockfile
+        id: substrate_pin
+        shell: bash
+        run: |
+          echo "commit=$(node -pe 'JSON.parse(require(\"fs\").readFileSync(\"pins/skills.lock.json\",\"utf8\")).substrate_pin.commit')" >> "$GITHUB_OUTPUT"
+
       - name: Checkout substrate
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
           repository: ${{ steps.repo.outputs.repo }}
+          ref: ${{ steps.substrate_pin.outputs.commit }}
           path: provenact-cli
 
       - name: Setup Rust
