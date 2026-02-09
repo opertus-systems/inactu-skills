@@ -34,7 +34,8 @@ jobs:
         id: substrate_pin
         shell: bash
         run: |
-          echo "commit=$(node -pe 'JSON.parse(require(\"fs\").readFileSync(\"pins/skills.lock.json\",\"utf8\")).substrate_pin.commit')" >> "$GITHUB_OUTPUT"
+          COMMIT="$(node -pe 'JSON.parse(require("fs").readFileSync("pins/skills.lock.json","utf8")).substrate_pin.commit')"
+          echo "commit=$COMMIT" >> "$GITHUB_OUTPUT"
 
       - name: Checkout substrate
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
