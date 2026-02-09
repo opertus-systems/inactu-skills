@@ -80,6 +80,19 @@ if [[ -z "$SKILL_ID" || -z "$FROM_VERSION" || -z "$TO_VERSION" ]]; then
   exit 1
 fi
 
+if [[ ! "$SKILL_ID" =~ ^[a-z0-9][a-z0-9._-]*$ ]]; then
+  echo "error: --id must match ^[a-z0-9][a-z0-9._-]*$" >&2
+  exit 1
+fi
+if [[ ! "$FROM_VERSION" =~ ^[a-z0-9][a-z0-9._-]*$ ]]; then
+  echo "error: --from-version must match ^[a-z0-9][a-z0-9._-]*$" >&2
+  exit 1
+fi
+if [[ ! "$TO_VERSION" =~ ^[a-z0-9][a-z0-9._-]*$ ]]; then
+  echo "error: --to-version must match ^[a-z0-9][a-z0-9._-]*$" >&2
+  exit 1
+fi
+
 resolve_provenact_cli "$ROOT_DIR"
 
 if ! command -v node >/dev/null 2>&1; then

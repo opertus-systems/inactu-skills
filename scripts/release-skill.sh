@@ -77,6 +77,15 @@ if [[ -z "$SKILL_ID" || -z "$SKILL_VERSION" || -z "$SOURCE_BUNDLE" ]]; then
   exit 1
 fi
 
+if [[ ! "$SKILL_ID" =~ ^[a-z0-9][a-z0-9._-]*$ ]]; then
+  echo "error: --id must match ^[a-z0-9][a-z0-9._-]*$" >&2
+  exit 1
+fi
+if [[ ! "$SKILL_VERSION" =~ ^[a-z0-9][a-z0-9._-]*$ ]]; then
+  echo "error: --version must match ^[a-z0-9][a-z0-9._-]*$" >&2
+  exit 1
+fi
+
 resolve_provenact_cli "$ROOT_DIR"
 
 if ! command -v node >/dev/null 2>&1; then
