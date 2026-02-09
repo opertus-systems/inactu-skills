@@ -1,0 +1,11 @@
+{
+  "name": "extract.text",
+  "version": "0.1.1",
+  "entrypoint": "run",
+  "artifact": "sha256:03b85fa8fb92d2f3704a2560afb0cfab1698c8b713f10a41cd414abc30548be7",
+  "capabilities": [],
+  "signers": [
+    "alice.dev",
+    "codex.release"
+  ]
+}

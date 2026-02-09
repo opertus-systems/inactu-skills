@@ -1,6 +1,6 @@
 # Default Skill Bundle v0 Specification
 
-Status: Draft for implementation in `inactu-skills`
+Status: Draft for implementation in `provenact-skills`
 
 ## Goal
 
@@ -283,14 +283,10 @@ Each skill manifest MUST declare only the minimal capability set required.
 
 - `fs.read_text`: `fs.read`
 - `fs.read_tree`: `fs.read` (tree traversal via dedicated hostcall)
-- `fs.write_patch`: `fs.patch.apply` (new host capability)
-- `shell.exec_safe`: `exec.safe` (new host capability)
-- `search.ripgrep`: `search.rg` (new host capability)
-- `git.status`: `git.read.status` (new host capability)
-- `git.diff`: `git.read.diff` (new host capability)
 - `http.fetch_text`: `net.http`
-- `json.validate`: `json.validate` (new host capability)
-- `extract.text`: `text.extract` (new host capability)
+- ABI-blocked placeholder skills use `[]` until hostcalls exist:
+  `fs.write_patch`, `shell.exec_safe`, `search.ripgrep`, `git.status`,
+  `git.diff`, `json.validate`, `extract.text`
 
 ## ABI mapping status in this repository
 

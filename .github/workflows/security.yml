@@ -38,8 +38,8 @@ jobs:
       - name: Checkout substrate
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
-          repository: ${{ github.repository_owner }}/inactu
-          path: inactu
+          repository: ${{ github.repository_owner }}/provenact-cli
+          path: provenact-cli
 
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@4be9e76fd7c4901c61fb841f559994984270fce7
@@ -49,14 +49,14 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Build inactu-cli
-        working-directory: inactu
-        run: cargo build -p inactu-cli
+      - name: Build provenact-cli
+        working-directory: provenact-cli
+        run: cargo build -p provenact-cli
 
       - name: Validate substrate pin matches checked out commit
         run: |
           EXPECTED="$(node -pe 'JSON.parse(require("fs").readFileSync("pins/skills.lock.json","utf8")).substrate_pin.commit')"
-          ACTUAL="$(git -C inactu rev-parse HEAD)"
+          ACTUAL="$(git -C provenact-cli rev-parse HEAD)"
           if [ "$EXPECTED" != "$ACTUAL" ]; then
             echo "lockfile substrate pin mismatch: expected $EXPECTED, got $ACTUAL" >&2
             exit 1
@@ -64,5 +64,5 @@ jobs:
 
       - name: Verify lockfile pins
         env:
-          INACTU_CLI_BIN: ${{ github.workspace }}/inactu/target/debug/inactu-cli
+          PROVENACT_CLI_BIN: ${{ github.workspace }}/provenact-cli/target/debug/provenact-cli
         run: make verify-pins

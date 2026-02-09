@@ -9,7 +9,7 @@
 ## Release Gate
 
 A pin is releasable only if:
-- `inactu-cli verify` succeeds,
+- `provenact-cli verify` succeeds,
 - `artifact` and `manifest_hash` match lock entries,
 - `keys_digest` matches lock entry,
 - expected signer IDs are present,

@@ -6,7 +6,7 @@
   "capabilities": [
     {
       "kind": "search.rg",
-      "value": "/tmp/inactu-fs"
+      "value": "/tmp/provenact-fs"
     }
   ],
   "signers": [

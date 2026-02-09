@@ -1,6 +1,6 @@
 (module
-  (import "inactu" "queue_consume" (func $queue_consume (param i32 i32 i32 i32) (result i32)))
-  (import "inactu" "output_write" (func $output_write (param i32 i32) (result i32)))
+  (import "provenact" "queue_consume" (func $queue_consume (param i32 i32 i32 i32) (result i32)))
+  (import "provenact" "output_write" (func $output_write (param i32 i32) (result i32)))
   (memory (export "memory") 1)
   (data (i32.const 0) "default")
   (func (export "run") (result i32)

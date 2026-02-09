@@ -2,8 +2,8 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-INACTU_CLI_BIN="${INACTU_CLI_BIN:-}"
-source "$ROOT_DIR/scripts/lib/inactu_cli.sh"
+PROVENACT_CLI_BIN="${PROVENACT_CLI_BIN:-}"
+source "$ROOT_DIR/scripts/lib/provenact_cli.sh"
 
 SKILL_ID=""
 FROM_VERSION=""
@@ -32,7 +32,7 @@ It copies:
 
 And regenerates:
   - manifest.json (version set to --to-version)
-  - signatures.json (unsigned scaffold via inactu-cli pack)
+  - signatures.json (unsigned scaffold via provenact-cli pack)
 USAGE
 }
 
@@ -80,7 +80,7 @@ if [[ -z "$SKILL_ID" || -z "$FROM_VERSION" || -z "$TO_VERSION" ]]; then
   exit 1
 fi
 
-resolve_inactu_cli "$ROOT_DIR"
+resolve_provenact_cli "$ROOT_DIR"
 
 if ! command -v node >/dev/null 2>&1; then
   echo "error: node is required" >&2
@@ -139,7 +139,7 @@ PACK_ARGS=(
 if [[ "$ALLOW_EXPERIMENTAL" == "true" ]]; then
   PACK_ARGS+=(--allow-experimental)
 fi
-"$INACTU_CLI_BIN" "${PACK_ARGS[@]}" >/dev/null
+"$PROVENACT_CLI_BIN" "${PACK_ARGS[@]}" >/dev/null
 
 cp "$SOURCE_DIR/$KEYS_FILE" "$TARGET_DIR/$KEYS_FILE"
 
@@ -151,5 +151,5 @@ fi
 
 echo "OK prepare-release id=$SKILL_ID from=$FROM_VERSION to=$TO_VERSION bundle=skills/$SKILL_ID/$TO_VERSION"
 echo "next:"
-echo "  $INACTU_CLI_BIN sign --bundle \"$TARGET_DIR\" --signer <signer-id> --secret-key <secret-key-file>"
+echo "  $PROVENACT_CLI_BIN sign --bundle \"$TARGET_DIR\" --signer <signer-id> --secret-key <secret-key-file>"
 echo "  ./scripts/release-skill.sh --id \"$SKILL_ID\" --version \"$TO_VERSION\" --source-bundle \"$TARGET_DIR\""

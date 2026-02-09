@@ -1,0 +1,16 @@
+{
+  "artifact": "sha256:03b85fa8fb92d2f3704a2560afb0cfab1698c8b713f10a41cd414abc30548be7",
+  "manifest_hash": "sha256:e3b0a46c1f00df303ff53ba2707c3549c32c1b8869131473a64e046eed28d3ba",
+  "signatures": [
+    {
+      "signer": "alice.dev",
+      "algorithm": "ed25519",
+      "signature": "deRRheJHeXGvAJCGME4mwqEpBMURddJdKt9MnCoSl5AVxPleQCjXn46l8YCDIMEZYAEvmZg44Mk19EAQ/Y2wAA=="
+    },
+    {
+      "signer": "codex.release",
+      "algorithm": "ed25519",
+      "signature": "DagGg0q9tOvK0TGLzm0T0hgln6SEeDC4iG8WEILC7w7lLdizbpvL0n0sgJ7zKRaLreANKzttcg9Jrf8xcEL+Dg=="
+    }
+  ]
+}

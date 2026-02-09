@@ -2,7 +2,7 @@
 
 ## Scope Guardrails
 
-`inactu-skills` stores immutable skill artifacts and pin metadata.
+`provenact-skills` stores immutable skill artifacts and pin metadata.
 
 Allowed:
 - adding/updating signed skill bundles
@@ -33,3 +33,7 @@ find scripts -type f -name '*.sh' -print0 | xargs -0 -n1 bash -n
 ## Security Reporting
 
 See `SECURITY.md` for disclosure process.
+
+## Work item labeling
+
+All work must have `area:*`, `type:*`, and `risk:*` labels so it is triaged and synced into the org project.

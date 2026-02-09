@@ -2,13 +2,13 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-INACTU_CLI_BIN="${INACTU_CLI_BIN:-}"
+PROVENACT_CLI_BIN="${PROVENACT_CLI_BIN:-}"
 SIGNER_ID="${SIGNER_ID:-alice.dev}"
-SECRET_KEY="${SECRET_KEY:-$ROOT_DIR/../inactu/test-vectors/good/verify-run-verify-receipt/signer-secret-key.txt}"
+SECRET_KEY="${SECRET_KEY:-$ROOT_DIR/../provenact-cli/test-vectors/good/verify-run-verify-receipt/signer-secret-key.txt}"
 WATC_MANIFEST="${WATC_MANIFEST:-$ROOT_DIR/tools/watc/Cargo.toml}"
-source "$ROOT_DIR/scripts/lib/inactu_cli.sh"
+source "$ROOT_DIR/scripts/lib/provenact_cli.sh"
 
-resolve_inactu_cli "$ROOT_DIR"
+resolve_provenact_cli "$ROOT_DIR"
 if [[ ! -f "$SECRET_KEY" ]]; then
   echo "error: secret key not found: $SECRET_KEY" >&2
   exit 1
@@ -80,9 +80,9 @@ m.artifact = artifact;
 fs.writeFileSync(outPath, JSON.stringify(m, null, 2) + "\n");
 ' "$BUNDLE_DIR/manifest.json" "$TMP_MANIFEST" "$ID" "$VERSION" "$ARTIFACT"
 
-  "$INACTU_CLI_BIN" pack --bundle "$BUNDLE_DIR" --wasm "$TMP_WASM" --manifest "$TMP_MANIFEST" >/dev/null
-  "$INACTU_CLI_BIN" sign --bundle "$BUNDLE_DIR" --signer "$SIGNER_ID" --secret-key "$SECRET_KEY" >/dev/null
-  INACTU_CLI_BIN="$INACTU_CLI_BIN" "$ROOT_DIR/scripts/release-skill.sh" --id "$ID" --version "$VERSION" --source-bundle "$BUNDLE_DIR" --allow-replace >/dev/null
+  "$PROVENACT_CLI_BIN" pack --bundle "$BUNDLE_DIR" --wasm "$TMP_WASM" --manifest "$TMP_MANIFEST" >/dev/null
+  "$PROVENACT_CLI_BIN" sign --bundle "$BUNDLE_DIR" --signer "$SIGNER_ID" --secret-key "$SECRET_KEY" >/dev/null
+  PROVENACT_CLI_BIN="$PROVENACT_CLI_BIN" "$ROOT_DIR/scripts/release-skill.sh" --id "$ID" --version "$VERSION" --source-bundle "$BUNDLE_DIR" --allow-replace >/dev/null
 
   rm -rf "$TMP_DIR"
   echo "OK rebuild-skill id=$ID version=$VERSION"

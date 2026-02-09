@@ -2,17 +2,17 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-INACTU_CLI_BIN="${INACTU_CLI_BIN:-}"
-INACTU_ROOT="${INACTU_ROOT:-$ROOT_DIR/../inactu}"
+PROVENACT_CLI_BIN="${PROVENACT_CLI_BIN:-}"
+PROVENACT_ROOT="${PROVENACT_ROOT:-$ROOT_DIR/../provenact-cli}"
 VERSION="${VERSION:-0.1.0}"
 SIGNER_ID="${SIGNER_ID:-alice.dev}"
-SECRET_KEY="${SECRET_KEY:-$INACTU_ROOT/test-vectors/good/verify-run-verify-receipt/signer-secret-key.txt}"
-TEMPLATE_WASM="${TEMPLATE_WASM:-$INACTU_ROOT/test-vectors/good/minimal-zero-cap/skill.wasm}"
-TEMPLATE_KEYS="${TEMPLATE_KEYS:-$INACTU_ROOT/test-vectors/good/minimal-zero-cap/public-keys.json}"
+SECRET_KEY="${SECRET_KEY:-$PROVENACT_ROOT/test-vectors/good/verify-run-verify-receipt/signer-secret-key.txt}"
+TEMPLATE_WASM="${TEMPLATE_WASM:-$PROVENACT_ROOT/test-vectors/good/minimal-zero-cap/skill.wasm}"
+TEMPLATE_KEYS="${TEMPLATE_KEYS:-$PROVENACT_ROOT/test-vectors/good/minimal-zero-cap/public-keys.json}"
 WATC_MANIFEST="${WATC_MANIFEST:-$ROOT_DIR/tools/watc/Cargo.toml}"
-source "$ROOT_DIR/scripts/lib/inactu_cli.sh"
+source "$ROOT_DIR/scripts/lib/provenact_cli.sh"
 
-resolve_inactu_cli "$ROOT_DIR" "$INACTU_ROOT"
+resolve_provenact_cli "$ROOT_DIR" "$PROVENACT_ROOT"
 if ! command -v node >/dev/null 2>&1; then
   echo "error: node is required" >&2
   exit 1
@@ -34,8 +34,8 @@ SKILLS=(
   'random.bytes|[{"kind":"random.bytes","value":"bounded"}]|skills-src/random.bytes.wat'
   'json.transform|[]|skills-src/json.transform.wat'
   'template.render|[]|skills-src/template.render.wat'
-  'fs.read|[{"kind":"fs.read","value":"/tmp/inactu-fs"}]|skills-src/fs.read.wat'
-  'fs.write|[{"kind":"fs.write","value":"/tmp/inactu-fs"}]|skills-src/fs.write.wat'
+  'fs.read|[{"kind":"fs.read","value":"/tmp/provenact-fs"}]|skills-src/fs.read.wat'
+  'fs.write|[{"kind":"fs.write","value":"/tmp/provenact-fs"}]|skills-src/fs.write.wat'
   'receipt.verify|[]|skills-src/receipt.verify.wat'
   'signature.verify|[]|skills-src/signature.verify.wat'
   'policy.eval|[]|skills-src/policy.eval.wat'
@@ -76,7 +76,7 @@ const manifest = {
 fs.writeFileSync(out, JSON.stringify(manifest, null, 2) + "\n");
 ' "$TMP_MANIFEST" "$ID" "$VERSION" "$ARTIFACT" "$SIGNER_ID" "$CAPS"
 
-  "$INACTU_CLI_BIN" pack \
+  "$PROVENACT_CLI_BIN" pack \
     --bundle "$TARGET_DIR" \
     --wasm "$TMP_WASM" \
     --manifest "$TMP_MANIFEST" >/dev/null
@@ -84,12 +84,12 @@ fs.writeFileSync(out, JSON.stringify(manifest, null, 2) + "\n");
 
   cp "$TEMPLATE_KEYS" "$TARGET_DIR/public-keys.json"
 
-  "$INACTU_CLI_BIN" sign \
+  "$PROVENACT_CLI_BIN" sign \
     --bundle "$TARGET_DIR" \
     --signer "$SIGNER_ID" \
     --secret-key "$SECRET_KEY" >/dev/null
 
-  INACTU_CLI_BIN="$INACTU_CLI_BIN" "$ROOT_DIR/scripts/release-skill.sh" \
+  PROVENACT_CLI_BIN="$PROVENACT_CLI_BIN" "$ROOT_DIR/scripts/release-skill.sh" \
     --id "$ID" \
     --version "$VERSION" \
     --source-bundle "$TARGET_DIR" \

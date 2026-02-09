@@ -3,9 +3,9 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 LOCK_FILE="$ROOT_DIR/pins/skills.lock.json"
-INACTU_CLI_BIN="${INACTU_CLI_BIN:-}"
+PROVENACT_CLI_BIN="${PROVENACT_CLI_BIN:-}"
 MIN_SIGNERS="${MIN_SIGNERS:-2}"
-source "$ROOT_DIR/scripts/lib/inactu_cli.sh"
+source "$ROOT_DIR/scripts/lib/provenact_cli.sh"
 
 SKILL_ID=""
 SKILL_VERSION=""
@@ -77,7 +77,7 @@ if [[ -z "$SKILL_ID" || -z "$SKILL_VERSION" || -z "$SOURCE_BUNDLE" ]]; then
   exit 1
 fi
 
-resolve_inactu_cli "$ROOT_DIR"
+resolve_provenact_cli "$ROOT_DIR"
 
 if ! command -v node >/dev/null 2>&1; then
   echo "error: node is required" >&2
@@ -149,14 +149,16 @@ if [[ "$UNIQUE_SIGNER_KEYS" -lt "$MIN_SIGNERS" ]]; then
   exit 1
 fi
 
-"$INACTU_CLI_BIN" verify \
+"$PROVENACT_CLI_BIN" verify \
   --bundle "$TARGET_DIR" \
   --keys "$TARGET_DIR/$KEYS_FILE" \
   --keys-digest "$KEYS_DIGEST" >/dev/null
 
 if [[ -z "$SUBSTRATE_COMMIT" ]]; then
-  if [[ -d "$ROOT_DIR/../inactu/.git" ]]; then
-    SUBSTRATE_COMMIT="$(cd "$ROOT_DIR/../inactu" && git rev-parse HEAD)"
+  if [[ -d "$ROOT_DIR/../provenact-cli/.git" ]]; then
+    SUBSTRATE_COMMIT="$(cd "$ROOT_DIR/../provenact-cli" && git rev-parse HEAD)"
+  elif [[ -d "$ROOT_DIR/../provenact/.git" ]]; then
+    SUBSTRATE_COMMIT="$(cd "$ROOT_DIR/../provenact" && git rev-parse HEAD)"
   elif [[ -f "$LOCK_FILE" ]]; then
     SUBSTRATE_COMMIT="$(node -pe 'const l=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")); (l.substrate_pin&&l.substrate_pin.commit)||""' "$LOCK_FILE")"
   fi
@@ -186,14 +188,14 @@ if (fs.existsSync(lockPath)) {
   lock = {
     schema_version: "1.0.0",
     generated_at: new Date().toISOString(),
-    substrate_pin: { repo: "inactu", commit: substrateCommit },
+    substrate_pin: { repo: "provenact", commit: substrateCommit },
     skills: []
   };
 }
 
 lock.schema_version = "1.0.0";
 lock.generated_at = new Date().toISOString();
-lock.substrate_pin = { repo: "inactu", commit: substrateCommit };
+lock.substrate_pin = { repo: "provenact", commit: substrateCommit };
 if (!Array.isArray(lock.skills)) lock.skills = [];
 
 const bundleDir = `skills/${skillId}/${version}`;

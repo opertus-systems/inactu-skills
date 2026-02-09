@@ -1,8 +1,8 @@
 (module
-  (import "inactu" "input_len" (func $input_len (result i32)))
-  (import "inactu" "input_read" (func $input_read (param i32 i32 i32) (result i32)))
-  (import "inactu" "fs_read_file" (func $fs_read_file (param i32 i32 i32 i32) (result i32)))
-  (import "inactu" "output_write" (func $output_write (param i32 i32) (result i32)))
+  (import "provenact" "input_len" (func $input_len (result i32)))
+  (import "provenact" "input_read" (func $input_read (param i32 i32 i32) (result i32)))
+  (import "provenact" "fs_read_file" (func $fs_read_file (param i32 i32 i32 i32) (result i32)))
+  (import "provenact" "output_write" (func $output_write (param i32 i32) (result i32)))
   (memory (export "memory") 1)
   (func (export "run") (result i32)
     (local $path_len i32)

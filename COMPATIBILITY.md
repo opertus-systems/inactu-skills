@@ -1,7 +1,7 @@
 # Compatibility Matrix
 
-This matrix pins `inactu-skills` lock state to tested substrate revisions.
+This matrix pins `provenact-skills` lock state to tested substrate revisions.
 
 | Repo | Artifact | Substrate Repo | Substrate Pin | Status |
 | --- | --- | --- | --- | --- |
-| `inactu-skills` | `pins/skills.lock.json` | `inactu` | `b45f54eaed1391bf88b9aadfc5083eda2bc3f0eb` | tested |
+| `provenact-skills` | `pins/skills.lock.json` | `provenact` | `b425123532bdb49aecbbacc5868e68215a5e8c20` | tested |

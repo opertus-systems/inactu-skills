@@ -1,11 +1,11 @@
-# inactu-skills
+# provenact-skills
 
-[![Compatibility](https://img.shields.io/badge/compatibility-inactu_pinned-blue)](./COMPATIBILITY.md)
+[![Compatibility](https://img.shields.io/badge/compatibility-provenact_pinned-blue)](./COMPATIBILITY.md)
 [![Status](https://img.shields.io/badge/status-pinned-green)](./pins/skills.lock.json)
 
 Immutable, signed base skills pinned for reproducible execution.
 
-Ecosystem map: `inactu/docs/ecosystem.md` in the substrate repository.
+Ecosystem map: `provenact/docs/ecosystem.md` in the substrate repository.
 
 This repository is for skill artifacts and pin metadata only.
 It does not include agent orchestration logic.
@@ -20,7 +20,7 @@ Compatibility pinning is tracked in `COMPATIBILITY.md`.
   - `signatures.json`
   - `public-keys.json`
 - `pins/skills.lock.json`: authoritative pin set (artifact, manifest hash, key digest)
-- `scripts/verify_pins.sh`: lockfile enforcement using `inactu-cli verify`
+- `scripts/verify_pins.sh`: lockfile enforcement using `provenact-cli verify`
 - `scripts/bootstrap-base-skills.sh`: generate/sign/pin the baseline skill set
 - `scripts/prepare-release.sh`: scaffold an unsigned next-version bundle
 - `scripts/release-skill.sh`: add/update a pinned skill release from a source bundle
@@ -77,6 +77,8 @@ Current ABI status:
 - Placeholder behavior pending runtime hostcall support:
   `fs.write_patch`, `shell.exec_safe`, `search.ripgrep`, `git.status`,
   `git.diff`, `json.validate`, `extract.text`
+- Placeholder skills are emitted with empty capability declarations in the
+  default-bundle bootstrap until corresponding hostcalls are implemented.
 
 Bootstrap command:
 
@@ -90,7 +92,7 @@ Current implementation note:
 - They are deterministic reference implementations with distinct binaries and
   capability declarations.
 - Host-integrated behaviors (network/fs/kv/queue/time/random) require runtime
-  ABI hostcall support in `inactu-cli`.
+  ABI hostcall support in `provenact-cli`.
 - Current hostcall-backed functional skills:
   - `time.now` (`time_now_unix`)
   - `random.bytes` (`random_fill`)
@@ -113,7 +115,7 @@ for every pinned bundle (`MIN_SIGNERS=2`).
 Optional binary override:
 
 ```bash
-INACTU_CLI_BIN=/path/to/inactu-cli ./scripts/verify_pins.sh
+PROVENACT_CLI_BIN=/path/to/provenact-cli ./scripts/verify_pins.sh
 ```
 
 Optional signer threshold override:
@@ -138,7 +140,7 @@ Recommended flow:
 2. Sign the prepared bundle:
 
 ```bash
-inactu-cli sign \
+provenact-cli sign \
   --bundle ./skills/echo.minimal/0.1.1 \
   --signer alice.dev \
   --secret-key /path/to/ed25519-secret-key.txt

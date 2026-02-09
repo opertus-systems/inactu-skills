@@ -2,18 +2,18 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-INACTU_CLI_BIN="${INACTU_CLI_BIN:-}"
-INACTU_ROOT="${INACTU_ROOT:-$ROOT_DIR/../inactu}"
+PROVENACT_CLI_BIN="${PROVENACT_CLI_BIN:-}"
+PROVENACT_ROOT="${PROVENACT_ROOT:-$ROOT_DIR/../provenact-cli}"
 VERSION="${VERSION:-0.1.0}"
 SIGNER_ID="${SIGNER_ID:-alice.dev}"
 SECOND_SIGNER_ID="${SECOND_SIGNER_ID:-codex.release}"
-SECRET_KEY="${SECRET_KEY:-$INACTU_ROOT/test-vectors/good/verify-run-verify-receipt/signer-secret-key.txt}"
-TEMPLATE_KEYS="${TEMPLATE_KEYS:-$INACTU_ROOT/test-vectors/good/minimal-zero-cap/public-keys.json}"
+SECRET_KEY="${SECRET_KEY:-$PROVENACT_ROOT/test-vectors/good/verify-run-verify-receipt/signer-secret-key.txt}"
+TEMPLATE_KEYS="${TEMPLATE_KEYS:-$PROVENACT_ROOT/test-vectors/good/minimal-zero-cap/public-keys.json}"
 WATC_MANIFEST="${WATC_MANIFEST:-$ROOT_DIR/tools/watc/Cargo.toml}"
 MIN_SIGNERS="${MIN_SIGNERS:-2}"
-source "$ROOT_DIR/scripts/lib/inactu_cli.sh"
+source "$ROOT_DIR/scripts/lib/provenact_cli.sh"
 
-resolve_inactu_cli "$ROOT_DIR" "$INACTU_ROOT"
+resolve_provenact_cli "$ROOT_DIR" "$PROVENACT_ROOT"
 if ! command -v node >/dev/null 2>&1; then
   echo "error: node is required" >&2
   exit 1
@@ -53,16 +53,17 @@ SECOND_SIGNER_PUB="$(cat "$TMP_SECOND_PUB")"
 
 # id|capabilities_json|wat_path
 SKILLS=(
-  'fs.read_text|[{"kind":"fs.read","value":"/tmp/inactu-fs"}]|skills-src/fs.read_text.wat'
-  'fs.read_tree|[{"kind":"fs.read","value":"/tmp/inactu-fs"}]|skills-src/fs.read_tree.wat'
-  'fs.write_patch|[{"kind":"fs.patch.apply","value":"/tmp/inactu-fs"}]|skills-src/unimplemented.hostcall.wat'
-  'shell.exec_safe|[{"kind":"exec.safe","value":"/tmp/inactu-fs"}]|skills-src/unimplemented.hostcall.wat'
-  'search.ripgrep|[{"kind":"search.rg","value":"/tmp/inactu-fs"}]|skills-src/unimplemented.hostcall.wat'
-  'git.status|[{"kind":"git.read.status","value":"/tmp/inactu-fs"}]|skills-src/unimplemented.hostcall.wat'
-  'git.diff|[{"kind":"git.read.diff","value":"/tmp/inactu-fs"}]|skills-src/unimplemented.hostcall.wat'
+  'fs.read_text|[{"kind":"fs.read","value":"/tmp/provenact-fs"}]|skills-src/fs.read_text.wat'
+  'fs.read_tree|[{"kind":"fs.read","value":"/tmp/provenact-fs"}]|skills-src/fs.read_tree.wat'
+  # Placeholder stubs keep an empty capability set until hostcalls are implemented in the runtime.
+  'fs.write_patch|[]|skills-src/unimplemented.hostcall.wat'
+  'shell.exec_safe|[]|skills-src/unimplemented.hostcall.wat'
+  'search.ripgrep|[]|skills-src/unimplemented.hostcall.wat'
+  'git.status|[]|skills-src/unimplemented.hostcall.wat'
+  'git.diff|[]|skills-src/unimplemented.hostcall.wat'
   'http.fetch_text|[{"kind":"net.http","value":"https://example.com/"}]|skills-src/http.fetch_text.wat'
-  'json.validate|[{"kind":"json.validate","value":"draft-07"}]|skills-src/unimplemented.hostcall.wat'
-  'extract.text|[{"kind":"text.extract","value":"safe"}]|skills-src/unimplemented.hostcall.wat'
+  'json.validate|[]|skills-src/unimplemented.hostcall.wat'
+  'extract.text|[]|skills-src/unimplemented.hostcall.wat'
 )
 
 for row in "${SKILLS[@]}"; do
@@ -99,7 +100,7 @@ const manifest = {
 fs.writeFileSync(out, JSON.stringify(manifest, null, 2) + "\n");
 ' "$TMP_MANIFEST" "$ID" "$VERSION" "$ARTIFACT" "$SIGNER_ID" "$SECOND_SIGNER_ID" "$CAPS"
 
-  "$INACTU_CLI_BIN" pack \
+  "$PROVENACT_CLI_BIN" pack \
     --bundle "$TARGET_DIR" \
     --wasm "$TMP_WASM" \
     --manifest "$TMP_MANIFEST" >/dev/null
@@ -116,16 +117,16 @@ keys[signer] = pub;
 fs.writeFileSync(outPath, JSON.stringify(keys, null, 2) + "\n");
 ' "$TEMPLATE_KEYS" "$TARGET_DIR/public-keys.json" "$SECOND_SIGNER_ID" "$SECOND_SIGNER_PUB"
 
-  "$INACTU_CLI_BIN" sign \
+  "$PROVENACT_CLI_BIN" sign \
     --bundle "$TARGET_DIR" \
     --signer "$SIGNER_ID" \
     --secret-key "$SECRET_KEY" >/dev/null
-  "$INACTU_CLI_BIN" sign \
+  "$PROVENACT_CLI_BIN" sign \
     --bundle "$TARGET_DIR" \
     --signer "$SECOND_SIGNER_ID" \
     --secret-key "$TMP_SECOND_SECRET" >/dev/null
 
-  MIN_SIGNERS="$MIN_SIGNERS" INACTU_CLI_BIN="$INACTU_CLI_BIN" "$ROOT_DIR/scripts/release-skill.sh" \
+  MIN_SIGNERS="$MIN_SIGNERS" PROVENACT_CLI_BIN="$PROVENACT_CLI_BIN" "$ROOT_DIR/scripts/release-skill.sh" \
     --id "$ID" \
     --version "$VERSION" \
     --source-bundle "$TARGET_DIR" \

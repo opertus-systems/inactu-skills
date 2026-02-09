@@ -1,7 +1,7 @@
 (module
-  (import "inactu" "input_len" (func $input_len (result i32)))
-  (import "inactu" "input_read" (func $input_read (param i32 i32 i32) (result i32)))
-  (import "inactu" "queue_publish" (func $queue_publish (param i32 i32 i32 i32) (result i32)))
+  (import "provenact" "input_len" (func $input_len (result i32)))
+  (import "provenact" "input_read" (func $input_read (param i32 i32 i32) (result i32)))
+  (import "provenact" "queue_publish" (func $queue_publish (param i32 i32 i32 i32) (result i32)))
   (memory (export "memory") 1)
   (data (i32.const 0) "default")
   (func (export "run") (result i32)

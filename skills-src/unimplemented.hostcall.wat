@@ -1,5 +1,5 @@
 (module
-  (import "inactu" "output_write" (func $output_write (param i32 i32) (result i32)))
+  (import "provenact" "output_write" (func $output_write (param i32 i32) (result i32)))
   (memory (export "memory") 1)
   (data (i32.const 0) "UNIMPLEMENTED_HOSTCALL")
   (func (export "run") (result i32)

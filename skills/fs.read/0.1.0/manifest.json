@@ -6,11 +6,11 @@
   "capabilities": [
     {
       "kind": "fs.read",
-      "value": "/tmp/inactu-fs"
+      "value": "/tmp/provenact-fs"
     }
   ],
   "signers": [
     "alice.dev",
-    "opertus.release"
+    "codex.release"
   ]
 }

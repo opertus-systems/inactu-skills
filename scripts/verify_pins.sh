@@ -3,11 +3,11 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 LOCK_FILE="$ROOT_DIR/pins/skills.lock.json"
-INACTU_CLI_BIN="${INACTU_CLI_BIN:-}"
+PROVENACT_CLI_BIN="${PROVENACT_CLI_BIN:-}"
 MIN_SIGNERS="${MIN_SIGNERS:-2}"
-source "$ROOT_DIR/scripts/lib/inactu_cli.sh"
+source "$ROOT_DIR/scripts/lib/provenact_cli.sh"
 
-resolve_inactu_cli "$ROOT_DIR"
+resolve_provenact_cli "$ROOT_DIR"
 
 # Parse lock entries with Node for predictable JSON handling.
 node -e '
@@ -31,7 +31,7 @@ for (const s of lock.skills) {
 
   echo "verifying $ID@$VERSION"
 
-  "$INACTU_CLI_BIN" verify \
+  "$PROVENACT_CLI_BIN" verify \
     --bundle "$BUNDLE_PATH" \
     --keys "$KEYS_PATH" \
     --keys-digest "$EXPECT_KEYS_DIGEST" >/dev/null
