@@ -2,7 +2,7 @@
   "name": "fs.read_tree",
   "version": "0.1.0",
   "entrypoint": "run",
-  "artifact": "sha256:2fcb9326dc0ed318489afb4d0e34f7adb95b9ce033809bef0ecb8b057d3da581",
+  "artifact": "sha256:f594f5a27b34c9ad6e72416d16685f64aa65e1dbbcb12657f1f9179dd25981c8",
   "capabilities": [
     {
       "kind": "fs.read",

@@ -2,7 +2,7 @@
   "name": "http.fetch_text",
   "version": "0.1.0",
   "entrypoint": "run",
-  "artifact": "sha256:76ad51e33bdf411c3ca39db46b551df3a1a46f87f314f40504b65b3eb68e6735",
+  "artifact": "sha256:f3a120aded1d55709d4c45fee310d57feba1f3ade676a5a979dff524231829a2",
   "capabilities": [
     {
       "kind": "net.http",
