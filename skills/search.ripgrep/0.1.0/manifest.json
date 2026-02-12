@@ -2,13 +2,8 @@
   "name": "search.ripgrep",
   "version": "0.1.0",
   "entrypoint": "run",
-  "artifact": "sha256:03b85fa8fb92d2f3704a2560afb0cfab1698c8b713f10a41cd414abc30548be7",
-  "capabilities": [
-    {
-      "kind": "search.rg",
-      "value": "/tmp/provenact-fs"
-    }
-  ],
+  "artifact": "sha256:e56c50116c3a881319e71b2157a3f4b4bdb593a7bb4d12841d7f72aec2b476c4",
+  "capabilities": [],
   "signers": [
     "alice.dev",
     "codex.release"
