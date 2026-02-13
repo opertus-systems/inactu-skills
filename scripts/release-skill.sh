@@ -85,6 +85,10 @@ if [[ ! "$SKILL_VERSION" =~ ^[a-z0-9][a-z0-9._-]*$ ]]; then
   echo "error: --version must match ^[a-z0-9][a-z0-9._-]*$" >&2
   exit 1
 fi
+if [[ ! "$KEYS_FILE" =~ ^[A-Za-z0-9._-]+$ ]]; then
+  echo "error: --keys-file must be a basename matching ^[A-Za-z0-9._-]+$" >&2
+  exit 1
+fi
 
 resolve_provenact_cli "$ROOT_DIR"
 

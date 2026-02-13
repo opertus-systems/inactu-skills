@@ -26,6 +26,10 @@ for (const s of lock.skills) {
   ].join("\t") + "\n");
 }
 ' "$LOCK_FILE" | while IFS=$'\t' read -r ID VERSION BUNDLE_DIR EXPECT_ARTIFACT EXPECT_MANIFEST_HASH KEYS_FILE EXPECT_KEYS_DIGEST EXPECT_SIGNERS; do
+  if [[ ! "$KEYS_FILE" =~ ^[A-Za-z0-9._-]+$ ]]; then
+    echo "error: lock entry $ID@$VERSION has invalid keys_file: $KEYS_FILE" >&2
+    exit 1
+  fi
   BUNDLE_PATH="$ROOT_DIR/$BUNDLE_DIR"
   KEYS_PATH="$BUNDLE_PATH/$KEYS_FILE"
 
